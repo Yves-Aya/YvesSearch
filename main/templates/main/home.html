@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>hompage</title>
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"
+</head>
+<body>
+
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-green"  >
+
+     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+     </button>
+     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link active"style="color:white" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link"style="color:white" href="#">about</a>
+      </div>
+       <div class="navbar-nav ml-auto">
+           <a class="nav-item nav-link"style="color:white" href="{%url 'addpost' %}">add lost item</a>
+       </div>
+      </div>
+    </nav>
+ {%block content%}
+   <div class="container  " id="welcome">
+    <h1> YvesSearch</h1>
+         <br>
+     <div class="row">
+      <div class="col-sm col-lg ">
+      <form method="POST"  action="" enctype="multipart/form-data"﻿   >
+         {% csrf_token%}
+        <div class="form-group ">
+        <input type="text" class="form-control " name="search"placeholder="enter the name on your lost document, eg Agbor Yves"  >
+           <br>
+        <button type="submit" class="btn btn-success btn-lg">Search</button>
+       </div>
+      <form>
+      </div>
+     </div>
+   </div>
+
+         <br>
+         <br>
+         <br>
+         <br>
+
+     <div class="container" style="text-align:center;width:500px" >
+        {% if messages %}
+           {% for message in messages %}
+              <div class=" alert alert-{{message.tags}}" style="color:brown"  >
+                 {{message}}
+              </div>
+           {% endfor %}
+        {% endif %}
+     </div>
+
+    <div class="container col-sm col-md" style="text-align:center;width:1600px">
+     {%if infos %}
+        <h2 style="align-text:center"  >Results of search</h2>
+         {% for info in infos %}
+          <div class="container"style="width:400px;height:800px">
+
+               <table border="5px" width="400px">
+                   <tr>
+                      <th>NAME:</th>
+                      <th>{{info.name}}:</th>
+                   </tr>
+                   <tr>
+                      <th>IMAGE:</th>
+                      <td><img src="{{info.image.url}}" class="img-responsive"style="width:250px;height:120px"</td>
+                   </tr>
+                   <tr>
+                      <th> CONTACT:</th>
+                      <td>{{info.content}}:</td>
+                   </tr>
+               </table>
+              <p><small>posted on the {{info.date_posted}}</small></p>
+          <div>
+         {%endfor%}
+     {%endif%}
+    </div>
+   {%endblock%}
+   <footer class="page-footer font-small blue" id="footer"   >
+   <div class="footer-copyright text-center py-3">powered by Yvee  © 2018 :</div>
+    <!-- Copyright -->
+
+   </footer>
+
+
+   <script src="{% static 'js/jquery.js' %}" ></script>
+   <script src=" {% static 'js/bootstrap.min.js' %}"></script>
+</body>
+</html>

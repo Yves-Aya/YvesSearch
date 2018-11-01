@@ -1,0 +1,23 @@
+
+{% extends 'main/home.html'%}
+{% load crispy_forms_tags %}
+
+{%block content%}
+  <br>
+<h3 style="text-align:center;color:green">Add Lost Item Here</h3>
+  <div class="container" style="width:400px;height:600px; " >
+<form method="POST" action="" enctype="multipart/form-data"  >
+    {% csrf_token %}
+    {{form|crispy}}
+    <input type="submit" class="btn btn-success btn-lg btn float-right" value="add item"/>
+
+</form>
+
+
+
+   </div>
+
+
+{%endblock%}
+
+
